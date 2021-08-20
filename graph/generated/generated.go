@@ -71,7 +71,7 @@ type MutationResolver interface {
 	CreateLink(ctx context.Context, input model.NewLink) (*model.Link, error)
 	CreateUser(ctx context.Context, input model.NewUser) (string, error)
 	Login(ctx context.Context, input model.Login) (string, error)
-	RefreshToken(ctx context.Context, input *model.RefreshTokenInput) (string, error)
+	RefreshToken(ctx context.Context, input model.RefreshTokenInput) (string, error)
 }
 type QueryResolver interface {
 	Links(ctx context.Context) ([]*model.Link, error)
@@ -710,7 +710,7 @@ func (ec *executionContext) _Mutation_refreshToken(ctx context.Context, field gr
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().RefreshToken(rctx, args["input"].(*model.RefreshTokenInput))
+		return ec.resolvers.Mutation().RefreshToken(rctx, args["input"].(model.RefreshTokenInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)

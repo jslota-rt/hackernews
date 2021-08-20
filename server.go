@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/jslota-rt/hackernews/graph"
 	hackernews "github.com/jslota-rt/hackernews/graph/generated"
+	"github.com/jslota-rt/hackernews/internal/auth"
 	database "github.com/jslota-rt/hackernews/internal/pkg/db/mysql"
 	"log"
 	"net/http"
@@ -22,6 +23,8 @@ func main() {
 	}
 
 	router := chi.NewRouter()
+
+	router.Use(auth.Middleware())
 
 	database.InitDB()
 	database.Migrate()
